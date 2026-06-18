@@ -119,3 +119,4 @@ auto-optimized (AVIF/WebP, responsive `srcset`). Keep `priority` on the hero
 image for the best LCP.
 # salah_shop
 # salah_shop
+# salah_arduino1
