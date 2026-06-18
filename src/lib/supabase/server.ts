@@ -1,6 +1,7 @@
 import "server-only";
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import type { Database } from "@/types/database.types";
 
 /**
  * Server-side Supabase client using the service-role key.
@@ -9,7 +10,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
  * The service-role key bypasses RLS, so it must NEVER be imported into a
  * Client Component. `server-only` enforces that at build time.
  */
-export function createServiceClient(): SupabaseClient {
+export function createServiceClient(): SupabaseClient<Database> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -19,7 +20,7 @@ export function createServiceClient(): SupabaseClient {
     );
   }
 
-  return createClient(url, serviceRoleKey, {
+  return createClient<Database>(url, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 }
