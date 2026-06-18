@@ -118,3 +118,4 @@ real `.jpg`/`.webp` files in `public/images` and update the `src` props in
 auto-optimized (AVIF/WebP, responsive `srcset`). Keep `priority` on the hero
 image for the best LCP.
 # salah_shop
+# salah_shop
