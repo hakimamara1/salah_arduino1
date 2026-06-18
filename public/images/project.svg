@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="مشروع أردوينو">
+  <defs>
+    <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef6f6"/>
+      <stop offset="1" stop-color="#dcefef"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#pg)"/>
+  <rect x="110" y="90" width="180" height="120" rx="12" fill="#0e8f8f"/>
+  <g fill="#cdeeee">
+    <circle cx="140" cy="130" r="10"/><circle cx="178" cy="130" r="10"/>
+    <circle cx="216" cy="130" r="10"/><circle cx="254" cy="130" r="10"/>
+  </g>
+  <rect x="134" y="166" width="132" height="16" rx="8" fill="#0a6d6d"/>
+  <circle cx="270" cy="104" r="8" fill="#f0a500"/>
+</svg>

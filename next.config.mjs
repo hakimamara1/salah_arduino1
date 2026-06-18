@@ -1,0 +1,25 @@
+import { fileURLToPath } from "node:url";
+import { dirname } from "node:path";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  poweredByHeader: false,
+  // This app lives next to an unrelated Expo project; pin the tracing root so
+  // Next doesn't pick the parent lockfile.
+  outputFileTracingRoot: __dirname,
+  images: {
+    formats: ["image/avif", "image/webp"],
+    // Add your image CDN / Supabase storage host here when wiring real photos.
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+    ],
+  },
+  experimental: {
+    optimizePackageImports: ["lucide-react"],
+  },
+};
+
+export default nextConfig;
