@@ -9,12 +9,18 @@ const levelDots: Record<string, string> = {
   "متقدّم": "●●●",
 };
 
-export function Showcase() {
+export function Showcase({
+  title = "ماذا ستبني؟",
+  subtitle = "مشاريع حقيقية تتدرّج من السهل إلى المتقدّم — تتعلّم بالممارسة.",
+}: {
+  title?: string;
+  subtitle?: string;
+} = {}) {
   return (
     <section id="showcase" className="container scroll-mt-20 py-12">
-      <h2 className="section-title">ماذا ستبني؟</h2>
+      <h2 className="section-title">{title}</h2>
       <p className="mx-auto mt-2 max-w-md text-center text-muted-foreground">
-        مشاريع حقيقية تتدرّج من السهل إلى المتقدّم — تتعلّم بالممارسة.
+        {subtitle}
       </p>
 
       <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3">

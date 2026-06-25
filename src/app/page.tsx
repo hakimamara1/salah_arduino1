@@ -15,7 +15,13 @@ import { StickyCta } from "@/components/sections/sticky-cta";
 import { WhatsAppButton } from "@/components/sections/whatsapp-button";
 import { ViewContentTracker } from "@/components/analytics/view-content";
 import { StructuredData } from "@/components/structured-data";
-import { getVariant, normalizeVariant } from "@/lib/content";
+// Parent-focused (variant D) sections
+import { WhyChildNeedsIt } from "@/components/sections/parent/why-child-needs-it";
+import { BeforeAfter } from "@/components/sections/parent/before-after";
+import { NoTeacher } from "@/components/sections/parent/no-teacher";
+import { ParentTestimonial } from "@/components/sections/parent/parent-testimonial";
+import { GiftFraming } from "@/components/sections/parent/gift-framing";
+import { getVariant, normalizeVariant, PARENT_FAQ } from "@/lib/content";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
@@ -27,6 +33,7 @@ export default async function HomePage({
   const { v } = await searchParams;
   const variantId = normalizeVariant(v);
   const variant = getVariant(variantId);
+  const isParent = variantId === "D";
 
   return (
     <>
@@ -39,27 +46,40 @@ export default async function HomePage({
       <main>
         <Hero variant={variant} />
 
-        {/* Primary order form — right after the hero (above the fold-ish) */}
+        {/* Primary order form — right after the hero */}
         <OrderForm
           id="order-top"
           title={variant.orderFormTitle}
           variant={variantId}
         />
 
-        <Showcase />
-        <WhatsIncluded />
-        <WhyThisKit />
-        <LearningPath />
-        <WhatYouLearn />
-        {/* <Testimonials /> */}
-        <FaqSection />
+        {isParent ? (
+          <>
+            <WhyChildNeedsIt />
+            <BeforeAfter />
+            <Showcase
+              title="ماذا سيبني طفلك؟"
+              subtitle="٢٢ مشروعاً حقيقياً يصنعه بيديه — من إشارة المرور إلى الذراع الآلية."
+            />
+            <NoTeacher />
+            <ParentTestimonial />
+            <GiftFraming />
+            <FaqSection title="أسئلة الأهل" items={PARENT_FAQ} />
+          </>
+        ) : (
+          <>
+            <Showcase />
+            <WhatsIncluded />
+            <WhyThisKit />
+            <LearningPath />
+            <WhatYouLearn />
+            {/* <Testimonials /> */}
+            <FaqSection />
+          </>
+        )}
 
         {/* Repeated order form near the bottom */}
-        <OrderForm
-          id="order-bottom"
-          title="جاهز للطلب؟"
-          variant={variantId}
-        />
+        <OrderForm id="order-bottom" title="جاهز للطلب؟" variant={variantId} />
 
         <FinalCta variant={variant} />
       </main>

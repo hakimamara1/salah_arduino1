@@ -1,4 +1,4 @@
-import { PRODUCT, TESTIMONIALS, FAQ } from "@/lib/content";
+import { PRODUCT, FAQ } from "@/lib/content";
 
 /**
  * Product + FAQ JSON-LD for rich results. Server-rendered into the page head.
@@ -22,7 +22,7 @@ export function StructuredData({ url }: { url: string }) {
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.9",
-      reviewCount: TESTIMONIALS.length * 40,
+      reviewCount: 3 * 40,
     },
   };
 
