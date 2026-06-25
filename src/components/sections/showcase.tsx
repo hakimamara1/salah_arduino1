@@ -1,6 +1,7 @@
 import { ProductImage } from "@/components/product-image";
 import { Reveal } from "@/components/reveal";
 import { PROJECTS, PRODUCT } from "@/lib/content";
+import { resolveImage } from "@/lib/resolve-image";
 
 const levelDots: Record<string, string> = {
   "سهل": "●",
@@ -21,7 +22,7 @@ export function Showcase() {
           <Reveal key={project.title} delay={i * 60}>
             <article className="h-full overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-shadow hover:shadow-card">
               <ProductImage
-                src="/images/project.svg"
+                src={resolveImage(project.image)}
                 alt={`مشروع ${project.title}`}
                 sizes="(max-width: 768px) 50vw, 33vw"
                 className="aspect-[4/3]"

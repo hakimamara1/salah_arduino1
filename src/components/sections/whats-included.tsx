@@ -1,6 +1,7 @@
 import { ProductImage } from "@/components/product-image";
 import { Reveal } from "@/components/reveal";
 import { INCLUDED_ITEMS } from "@/lib/content";
+import { resolveImage } from "@/lib/resolve-image";
 
 export function WhatsIncluded() {
   return (
@@ -13,15 +14,15 @@ export function WhatsIncluded() {
 
         <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {INCLUDED_ITEMS.map((item, i) => (
-            <Reveal key={item} delay={i * 50}>
+            <Reveal key={item.name} delay={i * 50}>
               <div className="rounded-2xl border border-border bg-white p-3 text-center shadow-sm">
                 <ProductImage
-                  src="/images/project.svg"
-                  alt={item}
+                  src={resolveImage(item.image)}
+                  alt={item.name}
                   sizes="(max-width: 640px) 50vw, 25vw"
                   className="aspect-square rounded-xl"
                 />
-                <p className="mt-2 text-sm font-bold text-ink">{item}</p>
+                <p className="mt-2 text-sm font-bold text-ink">{item.name}</p>
               </div>
             </Reveal>
           ))}

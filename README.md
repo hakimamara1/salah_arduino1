@@ -52,6 +52,7 @@ Try a variant: `http://localhost:3000/?v=D`
 | `META_CAPI_TEST_EVENT_CODE` | Events Manager | Optional, for Test Events only |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | — | Intl format, digits only (e.g. `2136…`) |
 | `NEXT_PUBLIC_SITE_URL` | — | Canonical / OG base URL |
+| `DASHBOARD_PASSWORD` | — | **Server-only** login password for `/dashboard` |
 
 > Every integration is optional at runtime — with no env vars the page still
 > renders and runs; pixel/CAPI/Supabase calls simply no-op or surface a friendly
@@ -101,6 +102,24 @@ supabase/schema.sql
    deduplicates the two reports.
 
 ---
+
+## 🔐 Admin dashboard
+
+A private, read-only orders dashboard lives at **`/dashboard`** (English LTR).
+
+- **Login:** `/dashboard/login`, single shared password from `DASHBOARD_PASSWORD`.
+  A middleware (`src/middleware.ts`) guards every `/dashboard` route via an
+  httpOnly HMAC session cookie — no extra auth service.
+- **Stats:** total orders, today, last 7 days, estimated revenue, top variant.
+- **Table:** search (name/phone), filter by wilaya & variant, pagination,
+  click-to-call + WhatsApp links per order.
+- **Export:** `Export CSV` downloads the current filtered view (UTF-8 BOM so
+  Excel renders Arabic correctly).
+
+All reads run server-side through the service-role client, so customer PII never
+reaches the browser unauthenticated. To swap the shared password for real
+multi-user accounts later, replace `src/lib/auth/dashboard.ts` with Supabase
+Auth — the queries and UI stay unchanged.
 
 ## ▲ Deploy to Vercel
 

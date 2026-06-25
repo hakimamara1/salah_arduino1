@@ -3,7 +3,14 @@ import { BuyButton } from "@/components/buy-button";
 import { ProductImage } from "@/components/product-image";
 import { PriceTag } from "@/components/price-tag";
 import { Button } from "@/components/ui/button";
-import { BENEFITS, PRODUCT, TRUST_BADGES, type VariantContent } from "@/lib/content";
+import {
+  BENEFITS,
+  HERO_IMAGE,
+  PRODUCT,
+  TRUST_BADGES,
+  type VariantContent,
+} from "@/lib/content";
+import { resolveImage } from "@/lib/resolve-image";
 import { formatDZD } from "@/lib/utils";
 
 export function Hero({ variant }: { variant: VariantContent }) {
@@ -17,7 +24,7 @@ export function Hero({ variant }: { variant: VariantContent }) {
     <section className="container grid gap-8 py-8 sm:py-12 lg:grid-cols-2 lg:items-center lg:gap-12">
       <div className="order-1 lg:order-2">
         <ProductImage
-          src="/images/hero-kit.svg"
+          src={resolveImage(HERO_IMAGE)}
           alt={hero.imageAlt}
           priority
           sizes="(max-width: 1024px) 100vw, 50vw"
@@ -94,7 +101,7 @@ function FullBleedHero({ variant }: { variant: VariantContent }) {
   return (
     <section className="relative">
       <ProductImage
-        src="/images/hero-kit.svg"
+        src={resolveImage(HERO_IMAGE)}
         alt={hero.imageAlt}
         priority
         sizes="100vw"

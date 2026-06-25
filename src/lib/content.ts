@@ -55,27 +55,67 @@ export type Project = {
   title: string;
   level: "سهل" | "متوسط" | "متقدّم";
   skills: string;
+  /** Photo in /public/images. Falls back to the shared placeholder. */
+  image: string;
 };
 
 export const PROJECTS: Project[] = [
-  { title: "إشارة المرور", level: "سهل", skills: "LED · التوقيت · المنطق" },
-  { title: "جهاز قياس المسافة", level: "متوسط", skills: "حسّاس · شاشة · برمجة" },
-  { title: "جهاز إنذار", level: "متوسط", skills: "حسّاس حركة · صوت" },
-  { title: "شاشة LCD", level: "سهل", skills: "عرض · نصوص · أزرار" },
-  { title: "محطة طقس", level: "متوسط", skills: "حرارة · رطوبة · بيانات" },
-  { title: "ذراع آلية", level: "متقدّم", skills: "سيرفو · تحكّم · حركة" },
+  {
+    title: "إشارة المرور",
+    level: "سهل",
+    skills: "LED · التوقيت · المنطق",
+    image: "/images/project-traffic-light.jpg",
+  },
+  {
+    title: "جهاز قياس المسافة",
+    level: "متوسط",
+    skills: "حسّاس · شاشة · برمجة",
+    image: "/images/project-distance.jpg",
+  },
+  {
+    title: "جهاز إنذار",
+    level: "متوسط",
+    skills: "حسّاس حركة · صوت",
+    image: "/images/project-alarm.jpg",
+  },
+  {
+    title: "شاشة LCD",
+    level: "سهل",
+    skills: "عرض · نصوص · أزرار",
+    image: "/images/project-lcd.jpg",
+  },
+  {
+    title: "محطة طقس",
+    level: "متوسط",
+    skills: "حرارة · رطوبة · بيانات",
+    image: "/images/project-weather.jpg",
+  },
+  {
+    title: "ذراع آلية",
+    level: "متقدّم",
+    skills: "سيرفو · تحكّم · حركة",
+    image: "/images/project-robot-arm.jpg",
+  },
 ];
 
-export const INCLUDED_ITEMS = [
-  "Arduino UNO",
-  "Breadboard",
-  "شاشة LCD",
-  "Servo",
-  "حسّاسات متنوّعة",
-  "أسلاك وموصّلات",
-  "مقاومات و LED",
-  "كتاب الدليل",
-] as const;
+export type IncludedItem = { name: string; image: string };
+
+export const INCLUDED_ITEMS: IncludedItem[] = [
+  { name: "Arduino UNO", image: "/images/item-uno.jpg" },
+  { name: "Breadboard", image: "/images/item-breadboard.jpg" },
+  { name: "شاشة LCD", image: "/images/item-lcd.jpg" },
+  { name: "Servo", image: "/images/item-servo.jpg" },
+  { name: "حسّاسات متنوّعة", image: "/images/item-sensors.jpg" },
+  { name: "أسلاك وموصّلات", image: "/images/item-wires.jpg" },
+  { name: "مقاومات و LED", image: "/images/item-resistors.jpg" },
+  { name: "كتاب الدليل", image: "/images/item-book.jpg" },
+];
+
+/** Main hero product photo. */
+export const HERO_IMAGE = "/images/hero-kit.jpg";
+
+/** Shown until a real photo with the expected name is added to /public/images. */
+export const IMAGE_PLACEHOLDER = "/images/project.svg";
 
 export const COMPARISON = {
   others: {
@@ -110,25 +150,6 @@ export type Testimonial = {
   role: string;
 };
 
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    quote:
-      "بدأت من الصفر تماماً، وخلال أسبوع بنيت أول مشروع يعمل. الكتاب يشرح كل خطوة بوضوح.",
-    name: "أمين",
-    role: "طالب",
-  },
-  {
-    quote:
-      "اشتريتها لابني وصار يقضي وقته في بناء المشاريع بدل الألعاب. أفضل استثمار.",
-    name: "سارة",
-    role: "ولية أمر",
-  },
-  {
-    quote: "جودة المكوّنات ممتازة والتوصيل كان سريعاً. أنصح بها كل مبتدئ.",
-    name: "ياسين",
-    role: "هاوي إلكترونيات",
-  },
-];
 
 export type Faq = { q: string; a: string };
 
