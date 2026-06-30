@@ -8,7 +8,7 @@ export function NoTeacher() {
       <div className="container">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-5 rounded-2xl border border-border bg-white p-6 text-center shadow-sm sm:flex-row sm:text-right">
           <ProductImage
-            src={resolveImage("/images/item-book.jpg")}
+            src={resolveImage("/images/include/8.jpg")}
             alt="كتاب دليل المبتدئين"
             sizes="160px"
             className="aspect-[3/4] w-28 shrink-0 rounded-xl border border-border"

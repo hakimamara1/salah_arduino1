@@ -31,6 +31,7 @@ import {
   PARENT_FAQ,
   FUTURE_TESTIMONIAL,
 } from "@/lib/content";
+import { getWilayasWithFees } from "@/lib/queries/shipping";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
@@ -42,6 +43,7 @@ export default async function HomePage({
   const { v } = await searchParams;
   const variantId = normalizeVariant(v);
   const variant = getVariant(variantId);
+  const wilayas = await getWilayasWithFees();
 
   return (
     <>
@@ -59,6 +61,7 @@ export default async function HomePage({
           id="order-top"
           title={variant.orderFormTitle}
           variant={variantId}
+          wilayas={wilayas}
         />
 
         {variantId === "D" ? (
@@ -70,7 +73,7 @@ export default async function HomePage({
               subtitle="٢٢ مشروعاً حقيقياً يصنعه بيديه — من إشارة المرور إلى الذراع الآلية."
             />
             <NoTeacher />
-            <ParentTestimonial />
+            {/* <ParentTestimonial /> */}
             <GiftFraming />
             <FaqSection title="أسئلة الأهل" items={PARENT_FAQ} />
           </>
@@ -95,7 +98,12 @@ export default async function HomePage({
         )}
 
         {/* Repeated order form near the bottom */}
-        <OrderForm id="order-bottom" title="جاهز للطلب؟" variant={variantId} />
+        <OrderForm
+          id="order-bottom"
+          title="جاهز للطلب؟"
+          variant={variantId}
+          wilayas={wilayas}
+        />
 
         <FinalCta variant={variant} />
       </main>

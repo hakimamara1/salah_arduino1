@@ -49,8 +49,9 @@ export function OrdersTable({ rows }: { rows: OrderRow[] }) {
           <TableRow>
             <TableHead>Customer</TableHead>
             <TableHead>Phone</TableHead>
-            <TableHead>Wilaya</TableHead>
-            <TableHead>Address</TableHead>
+            <TableHead>Wilaya / Commune</TableHead>
+            <TableHead>Delivery</TableHead>
+            <TableHead>Total</TableHead>
             <TableHead>Variant</TableHead>
             <TableHead>Date</TableHead>
           </TableRow>
@@ -81,11 +82,28 @@ export function OrdersTable({ rows }: { rows: OrderRow[] }) {
                   </a>
                 </div>
               </TableCell>
-              <TableCell className="whitespace-nowrap">{order.wilaya}</TableCell>
               <TableCell className="max-w-xs">
-                <span className="line-clamp-2 text-muted-foreground">
+                <span className="font-medium text-ink">{order.wilaya}</span>
+                {order.commune && (
+                  <span className="block text-xs text-muted-foreground">
+                    {order.commune}
+                  </span>
+                )}
+                <span className="block truncate text-xs text-muted-foreground/80">
                   {order.address}
                 </span>
+              </TableCell>
+              <TableCell className="whitespace-nowrap">
+                {order.delivery_type ? (
+                  <Badge variant="secondary">
+                    {order.delivery_type === "home" ? "Home" : "Stop Desk"}
+                  </Badge>
+                ) : (
+                  <span className="text-muted-foreground">—</span>
+                )}
+              </TableCell>
+              <TableCell className="whitespace-nowrap font-bold text-ink">
+                {order.total != null ? `${order.total.toLocaleString("en-US")} DA` : "—"}
               </TableCell>
               <TableCell>
                 <Badge variant="brand">{order.landing_variant}</Badge>

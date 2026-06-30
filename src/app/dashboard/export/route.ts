@@ -16,7 +16,12 @@ const HEADERS = [
   "full_name",
   "phone",
   "wilaya",
+  "commune",
   "address",
+  "delivery_type",
+  "shipping_price",
+  "product_price",
+  "total",
   "landing_variant",
   "created_at",
 ] as const;

@@ -7,13 +7,46 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "14.5"
   }
   public: {
     Tables: {
+      communes: {
+        Row: {
+          created_at: string
+          id: number
+          is_active: boolean
+          name_ar: string
+          name_ascii: string
+          wilaya_code: string
+        }
+        Insert: {
+          created_at?: string
+          id?: never
+          is_active?: boolean
+          name_ar: string
+          name_ascii: string
+          wilaya_code: string
+        }
+        Update: {
+          created_at?: string
+          id?: never
+          is_active?: boolean
+          name_ar?: string
+          name_ascii?: string
+          wilaya_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communes_wilaya_code_fkey"
+            columns: ["wilaya_code"]
+            isOneToOne: false
+            referencedRelation: "wilayas"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       hero_images: {
         Row: {
           alt: string
@@ -47,30 +80,101 @@ export type Database = {
       orders: {
         Row: {
           address: string
+          commune: string | null
           created_at: string
+          delivery_type: string | null
           full_name: string
           id: string
           landing_variant: string
           phone: string
+          product_price: number | null
+          shipping_price: number | null
+          total: number | null
           wilaya: string
+          wilaya_code: string | null
         }
         Insert: {
           address: string
+          commune?: string | null
           created_at?: string
+          delivery_type?: string | null
           full_name: string
           id?: string
           landing_variant?: string
           phone: string
+          product_price?: number | null
+          shipping_price?: number | null
+          total?: number | null
           wilaya: string
+          wilaya_code?: string | null
         }
         Update: {
           address?: string
+          commune?: string | null
           created_at?: string
+          delivery_type?: string | null
           full_name?: string
           id?: string
           landing_variant?: string
           phone?: string
+          product_price?: number | null
+          shipping_price?: number | null
+          total?: number | null
           wilaya?: string
+          wilaya_code?: string | null
+        }
+        Relationships: []
+      }
+      shipping_fees: {
+        Row: {
+          home_price: number
+          is_active: boolean
+          stopdesk_price: number
+          updated_at: string
+          wilaya_code: string
+        }
+        Insert: {
+          home_price?: number
+          is_active?: boolean
+          stopdesk_price?: number
+          updated_at?: string
+          wilaya_code: string
+        }
+        Update: {
+          home_price?: number
+          is_active?: boolean
+          stopdesk_price?: number
+          updated_at?: string
+          wilaya_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shipping_fees_wilaya_code_fkey"
+            columns: ["wilaya_code"]
+            isOneToOne: true
+            referencedRelation: "wilayas"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      wilayas: {
+        Row: {
+          code: string
+          is_active: boolean
+          name_ar: string
+          name_ascii: string
+        }
+        Insert: {
+          code: string
+          is_active?: boolean
+          name_ar: string
+          name_ascii: string
+        }
+        Update: {
+          code?: string
+          is_active?: boolean
+          name_ar?: string
+          name_ascii?: string
         }
         Relationships: []
       }

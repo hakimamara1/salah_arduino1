@@ -2,6 +2,7 @@ import { ProductImage } from "@/components/product-image";
 import { Reveal } from "@/components/reveal";
 import { INCLUDED_ITEMS } from "@/lib/content";
 import { resolveImage } from "@/lib/resolve-image";
+import { Plus } from "lucide-react";
 
 export function WhatsIncluded() {
   return (
@@ -26,6 +27,9 @@ export function WhatsIncluded() {
               </div>
             </Reveal>
           ))}
+
+        </div>
+        <div className="flex items-center justify-center gap-2 mt-8 text-center text-brand font-bold"> <Plus />  اكثر من 10 مكونات أخرى يتضمنها الصندوق
         </div>
       </div>
     </section>

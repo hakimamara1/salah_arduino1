@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Download, LogOut, ImageIcon } from "lucide-react";
+import { Download, LogOut, ImageIcon, Truck } from "lucide-react";
 import { logout } from "@/app/dashboard/actions";
 import { getOrders, getOrderStats, DEFAULT_PAGE_SIZE } from "@/lib/queries/orders";
 import { StatCards } from "@/app/dashboard/_components/stat-cards";
@@ -56,6 +56,11 @@ export default async function DashboardPage({
             <Button asChild variant="ghost" size="sm">
               <Link href="/dashboard/hero">
                 <ImageIcon className="size-4" /> Hero images
+              </Link>
+            </Button>
+            <Button asChild variant="ghost" size="sm">
+              <Link href="/dashboard/shipping">
+                <Truck className="size-4" /> Shipping
               </Link>
             </Button>
             <form action={logout}>

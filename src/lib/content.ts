@@ -73,42 +73,46 @@ export const PROJECTS: Project[] = [
     image: "/images/project-distance.jpg",
   },
   {
-    title: "جهاز إنذار",
-    level: "متوسط",
-    skills: "حسّاس حركة · صوت",
-    image: "/images/project-alarm.jpg",
-  },
-  {
-    title: "شاشة LCD",
+    title: "عداد رقمي",
     level: "سهل",
-    skills: "عرض · نصوص · أزرار",
-    image: "/images/project-lcd.jpg",
+    skills: "7-Segment · العد · الأزرار",
+    image: "/images/project-counter.jpg",
   },
   {
-    title: "محطة طقس",
+    title: "قفل بكلمة مرور",
     level: "متوسط",
-    skills: "حرارة · رطوبة · بيانات",
-    image: "/images/project-weather.jpg",
+    skills: "Keypad · Password",
+    image: "/images/project-password.jpg",
   },
   {
-    title: "ذراع آلية",
+    title: "جهاز كشف المطر",
+    level: "متوسط",
+    skills: "حساس المطر · LED · إنذار",
+    image: "/images/project-rain.jpg",
+  },
+  {
+    title: "مشروع ذكي متكامل",
     level: "متقدّم",
-    skills: "سيرفو · تحكّم · حركة",
-    image: "/images/project-robot-arm.jpg",
+    skills: "دمج جميع المكونات",
+    image: "/images/project-final.jpg",
   },
 ];
 
 export type IncludedItem = { name: string; image: string };
 
 export const INCLUDED_ITEMS: IncludedItem[] = [
-  { name: "Arduino UNO", image: "/images/item-uno.jpg" },
-  { name: "Breadboard", image: "/images/item-breadboard.jpg" },
-  { name: "شاشة LCD", image: "/images/item-lcd.jpg" },
-  { name: "Servo", image: "/images/item-servo.jpg" },
-  { name: "حسّاسات متنوّعة", image: "/images/item-sensors.jpg" },
-  { name: "أسلاك وموصّلات", image: "/images/item-wires.jpg" },
-  { name: "مقاومات و LED", image: "/images/item-resistors.jpg" },
-  { name: "كتاب الدليل", image: "/images/item-book.jpg" },
+  { name: "Arduino UNO", image: "/images/include/1.jpg" },
+  { name: "Breadboard", image: "/images/include/2.jpg" },
+  { name: "7 Segment", image: "/images/include/3.jpg" },
+  { name: "Traffic Light", image: "/images/include/4.jpg" },
+  { name: "حسّاسات متنوّعة", image: "/images/include/5.jpg" },
+  { name: "أسلاك وموصّلات", image: "/images/include/6.jpg" },
+  { name: "مقاومات و LED", image: "/images/include/7.jpg" },
+  { name: "كتاب الدليل", image: "/images/include/8.jpg" },
+  { name: "Ultrasonic", image: "/images/include/9.jpg" },
+  { name: "Soil Sensor", image: "/images/include/10.jpg" },
+  { name: "Rain Sensor", image: "/images/include/11.jpg" },
+  { name: "لوحة مفاتيح 4×4", image: "/images/include/12.jpg" },
 ];
 
 /** Main hero product photo. */
