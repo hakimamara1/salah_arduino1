@@ -12,13 +12,21 @@ const nextConfig = {
   outputFileTracingRoot: __dirname,
   images: {
     formats: ["image/avif", "image/webp"],
-    // Add your image CDN / Supabase storage host here when wiring real photos.
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
+      // Supabase Storage (public bucket) — uploaded hero images.
+      {
+        protocol: "https",
+        hostname: "qhczqivclluhhjxypxbm.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
     ],
   },
   experimental: {
     optimizePackageImports: ["lucide-react"],
+    serverActions: {
+      bodySizeLimit: "6mb",
+    },
   },
 };
 

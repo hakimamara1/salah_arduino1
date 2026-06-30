@@ -1,8 +1,14 @@
 import { Star, Quote } from "lucide-react";
 import { PARENT_TESTIMONIAL } from "@/lib/content";
 
-export function ParentTestimonial() {
-  const t = PARENT_TESTIMONIAL;
+type TestimonialData = { quote: string; name: string; location: string };
+
+export function ParentTestimonial({
+  data = PARENT_TESTIMONIAL,
+}: {
+  data?: TestimonialData;
+} = {}) {
+  const t = data;
   return (
     <section className="container py-12">
       <figure className="mx-auto max-w-xl rounded-2xl border border-border bg-white p-6 text-right shadow-card">

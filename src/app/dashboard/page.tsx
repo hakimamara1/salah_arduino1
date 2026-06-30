@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Download, LogOut } from "lucide-react";
+import { Download, LogOut, ImageIcon } from "lucide-react";
 import { logout } from "@/app/dashboard/actions";
 import { getOrders, getOrderStats, DEFAULT_PAGE_SIZE } from "@/lib/queries/orders";
 import { StatCards } from "@/app/dashboard/_components/stat-cards";
@@ -52,11 +52,18 @@ export default async function DashboardPage({
             <h1 className="text-lg font-bold text-ink">{PRODUCT.brand}</h1>
             <p className="text-xs text-muted-foreground">Orders dashboard</p>
           </div>
-          <form action={logout}>
-            <Button variant="outline" size="sm" type="submit">
-              <LogOut className="size-4" /> Logout
+          <div className="flex items-center gap-2">
+            <Button asChild variant="ghost" size="sm">
+              <Link href="/dashboard/hero">
+                <ImageIcon className="size-4" /> Hero images
+              </Link>
             </Button>
-          </form>
+            <form action={logout}>
+              <Button variant="outline" size="sm" type="submit">
+                <LogOut className="size-4" /> Logout
+              </Button>
+            </form>
+          </div>
         </div>
       </header>
 

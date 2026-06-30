@@ -21,7 +21,16 @@ import { BeforeAfter } from "@/components/sections/parent/before-after";
 import { NoTeacher } from "@/components/sections/parent/no-teacher";
 import { ParentTestimonial } from "@/components/sections/parent/parent-testimonial";
 import { GiftFraming } from "@/components/sections/parent/gift-framing";
-import { getVariant, normalizeVariant, PARENT_FAQ } from "@/lib/content";
+// Future-focused (variant E) sections
+import { StakesTurnaround } from "@/components/sections/future/stakes-turnaround";
+import { FuturePath } from "@/components/sections/future/future-path";
+import { Reassurance } from "@/components/sections/future/reassurance";
+import {
+  getVariant,
+  normalizeVariant,
+  PARENT_FAQ,
+  FUTURE_TESTIMONIAL,
+} from "@/lib/content";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
@@ -33,7 +42,6 @@ export default async function HomePage({
   const { v } = await searchParams;
   const variantId = normalizeVariant(v);
   const variant = getVariant(variantId);
-  const isParent = variantId === "D";
 
   return (
     <>
@@ -53,7 +61,7 @@ export default async function HomePage({
           variant={variantId}
         />
 
-        {isParent ? (
+        {variantId === "D" ? (
           <>
             <WhyChildNeedsIt />
             <BeforeAfter />
@@ -64,6 +72,14 @@ export default async function HomePage({
             <NoTeacher />
             <ParentTestimonial />
             <GiftFraming />
+            <FaqSection title="أسئلة الأهل" items={PARENT_FAQ} />
+          </>
+        ) : variantId === "E" ? (
+          <>
+            <StakesTurnaround />
+            <FuturePath />
+            <ParentTestimonial data={FUTURE_TESTIMONIAL} />
+            <Reassurance />
             <FaqSection title="أسئلة الأهل" items={PARENT_FAQ} />
           </>
         ) : (
