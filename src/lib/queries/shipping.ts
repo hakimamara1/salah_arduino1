@@ -1,5 +1,6 @@
 import "server-only";
 
+import { unstable_cache } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/server";
 import type { Commune, DeliveryType, WilayaFee } from "@/lib/shipping";
 import { shippingPriceFor } from "@/lib/shipping";
@@ -8,36 +9,43 @@ import { shippingPriceFor } from "@/lib/shipping";
  * All serviceable wilayas joined with their delivery fees, ordered by code.
  * Small (≤58 rows) — loaded into the checkout so price updates are instant.
  */
-export async function getWilayasWithFees(): Promise<WilayaFee[]> {
-  const supabase = createServiceClient();
-  const { data, error } = await supabase
-    .from("wilayas")
-    .select(
-      "code, name_ar, is_active, shipping_fees(home_price, stopdesk_price, is_active)",
-    )
-    .eq("is_active", true)
-    .order("code", { ascending: true });
+export const getWilayasWithFees = unstable_cache(
+  async (): Promise<WilayaFee[]> => {
+    const supabase = createServiceClient();
+    const { data, error } = await supabase
+      .from("wilayas")
+      .select(
+        "code, name_ar, is_active, shipping_fees(home_price, stopdesk_price, is_active)",
+      )
+      .eq("is_active", true)
+      .order("code", { ascending: true });
 
-  if (error) {
-    console.error("[getWilayasWithFees] failed", error);
-    return [];
+    if (error) {
+      console.error("[getWilayasWithFees] failed", error);
+      return [];
+    }
+
+    return (data ?? [])
+      .map((w) => {
+        const fee = Array.isArray(w.shipping_fees)
+          ? w.shipping_fees[0]
+          : w.shipping_fees;
+        return {
+          code: w.code,
+          name: `${w.code} - ${w.name_ar}`,
+          homePrice: fee?.home_price ?? 0,
+          stopdeskPrice: fee?.stopdesk_price ?? 0,
+          isActive: (fee?.is_active ?? true) && w.is_active,
+        } satisfies WilayaFee;
+      })
+      .filter((w) => w.isActive);
+  },
+  ["wilayas-with-fees"],
+  {
+    revalidate: 3600, // Cache for 1 hour
+    tags: ["wilayas-with-fees"],
   }
-
-  return (data ?? [])
-    .map((w) => {
-      const fee = Array.isArray(w.shipping_fees)
-        ? w.shipping_fees[0]
-        : w.shipping_fees;
-      return {
-        code: w.code,
-        name: `${w.code} - ${w.name_ar}`,
-        homePrice: fee?.home_price ?? 0,
-        stopdeskPrice: fee?.stopdesk_price ?? 0,
-        isActive: (fee?.is_active ?? true) && w.is_active,
-      } satisfies WilayaFee;
-    })
-    .filter((w) => w.isActive);
-}
+);
 
 export type AdminFeeRow = {
   code: string;

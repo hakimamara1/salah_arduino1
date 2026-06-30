@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/server";
 import { requireDashboardAuth } from "@/lib/auth/require-dashboard";
 
@@ -27,6 +27,7 @@ export async function updateFee(formData: FormData): Promise<void> {
     { onConflict: "wilaya_code" },
   );
 
+  revalidateTag("wilayas-with-fees");
   revalidatePath("/dashboard/shipping");
   revalidatePath("/");
 }

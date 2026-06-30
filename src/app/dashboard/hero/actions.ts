@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { createServiceClient } from "@/lib/supabase/server";
 import { requireDashboardAuth } from "@/lib/auth/require-dashboard";
 import { HERO_BUCKET } from "@/lib/queries/hero-images";
@@ -17,6 +17,7 @@ const MIME_EXT: Record<string, string> = {
 };
 
 function refresh() {
+  revalidateTag("hero-images-all");
   revalidatePath("/dashboard/hero");
   revalidatePath("/");
 }
