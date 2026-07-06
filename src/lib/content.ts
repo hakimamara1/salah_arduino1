@@ -30,8 +30,8 @@ export const PRODUCT = {
   name: "عدة الأردوينو التعليمية الكاملة",
   brand: "Arduino Shop",
   sku: "ARD-STARTER-22",
-  price: 10000,
-  compareAtPrice: 14000,
+  price: 8200,
+  compareAtPrice: 11000,
   currency: "DZD",
   projectsCount: 22,
 } as const;

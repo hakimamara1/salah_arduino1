@@ -24,7 +24,7 @@ export async function submitOrder(
   const wilaya = clean(formData.get("wilaya")); // human label, e.g. "03 - الأغواط"
   const wilaya_code = clean(formData.get("wilaya_code"));
   const commune = clean(formData.get("commune"));
-  const address = clean(formData.get("address"));
+  const address = ""; // Default empty string to satisfy database schema and TypeScript interfaces
   const deliveryRaw = clean(formData.get("delivery_type"));
   const landing_variant = normalizeVariant(clean(formData.get("landing_variant")));
   // Same id the client used for its pixel Lead event → CAPI dedup.
@@ -36,7 +36,6 @@ export async function submitOrder(
   if (!/^\d{2}$/.test(wilaya_code)) errors.wilaya_code = "اختر الولاية.";
   if (!commune) errors.commune = "اختر البلدية.";
   if (!isDeliveryType(deliveryRaw)) errors.delivery_type = "اختر نوع التوصيل.";
-  if (address.length < 5) errors.address = "أدخل عنواناً واضحاً.";
 
   if (Object.keys(errors).length > 0) {
     return { status: "error", message: "يرجى تصحيح الحقول.", errors };
