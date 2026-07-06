@@ -237,14 +237,6 @@ export function OrderForm({
               )}
             </div>
 
-            <Field
-              label="العنوان"
-              name="address"
-              autoComplete="street-address"
-              placeholder="الحي، الشارع، أقرب نقطة دالة"
-              error={state.errors?.address}
-            />
-
             {/* Order summary */}
             <dl className="space-y-2 rounded-xl bg-secondary p-4 text-sm">
               <div className="flex items-center justify-between">
